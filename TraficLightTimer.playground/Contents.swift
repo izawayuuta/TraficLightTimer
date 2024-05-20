@@ -22,16 +22,18 @@ class Alarm {
     }
     @objc func countup() {
         count += 1
-        print("\(count)秒経過")
+        print("\(count)")
         if limit1 == count {
             //limit1（5秒の時にプリント文を出力）
-            print(TraficLight.green.computedProperty)
+            print(TraficLight.green1.computedProperty)
         } else if limit2 == count {
             //limit2（10秒の時にプリント文を出力）
             print(TraficLight.yellow.computedProperty)
         } else if limit3 == count {
             //limit3（15秒の時にプリント文を出力）
             print(TraficLight.red.computedProperty)
+            // 赤と同時に右折の青を出力
+            print(TraficLight.green2.computedProperty)
             timer?.invalidate()
         }
     }
@@ -41,18 +43,21 @@ class Alarm {
    alarm.start()
 
 enum TraficLight {
-    case green
+    case green1
+    case green2
     case yellow
     case red
     
     var computedProperty: String {
         switch self {
-        case .green:
-            return "青になりました！"
+        case .green1:
+            return "青"
         case .yellow:
-            return "黄になりました！"
+            return "黄"
         case .red:
-            return "赤になりました！"
+            return "赤"
+        case .green2:
+            return "右折専用が青"
         }
     }
 }
